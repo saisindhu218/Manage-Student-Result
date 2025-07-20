@@ -73,3 +73,4 @@ A web-based Spring Boot application for managing student academic results. It al
 
 This project is open-source and available for educational and personal use.
 
+Rachabattuni Sai Sindhu
