@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Student Results</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* General container styling */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form styling */
+        .add-student-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .add-student-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .add-student-form input[type="text"],
+        .add-student-form input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .add-student-form .button-group {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .add-student-form button,
+        .add-student-form .back-button {
+            flex: 1;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .add-student-form button:hover {
+            background-color: #45a049;
+        }
+
+        .add-student-form .back-button {
+            background-color: #6c757d;
+        }
+
+        .add-student-form .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        /* Table styling (reused from dashboard.html) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9e9e9;
+        }
+
+        /* Responsive table styles - ONLY apply on very small screens */
+        @media screen and (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                overflow: hidden;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+                white-space: normal;
+            }
+            td:last-child {
+                border-bottom: 0;
+            }
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                content: attr(data-label);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Manage Student Results</h1>
+    <a th:href="@{/landing-page}" class="back-button">Back to Options</a>
+
+    <!-- Add Student Form -->
+    <h2>Add New Student</h2>
+    <form th:action="@{/manage-students/add}" th:object="${newStudent}" method="post" class="add-student-form">
+        <div>
+            <label for="universityRollNumber">University Roll No.:</label>
+            <input type="text" id="universityRollNumber" th:field="*{universityRollNumber}" required/>
+        </div>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" required/>
+        </div>
+        <div>
+            <label for="semester">Semester:</label>
+            <input type="text" id="semester" th:field="*{semester}" required/>
+        </div>
+        <div>
+            <label for="subject1Marks">Subject 1 Marks:</label>
+            <input type="number" id="subject1Marks" th:field="*{subject1Marks}" min="0" max="100" required/>
+        </div>
+        <div>
+            <label for="subject2Marks">Subject 2 Marks:</label>
+            <input type="number" id="subject2Marks" th:field="*{subject2Marks}" min="0" max="100" required/>
+        </div>
+        <div>
+            <label for="subject3Marks">Subject 3 Marks:</label>
+            <input type="number" id="subject3Marks" th:field="*{subject3Marks}" min="0" max="100" required/>
+        </div>
+        <div>
+            <label for="subject4Marks">Subject 4 Marks:</label>
+            <input type="number" id="subject4Marks" th:field="*{subject4Marks}" min="0" max="100" required/>
+        </div>
+        <div>
+            <label for="subject5Marks">Subject 5 Marks:</label>
+            <input type="number" id="subject5Marks" th:field="*{subject5Marks}" min="0" max="100" required/>
+        </div>
+        <div class="button-group">
+            <button type="submit">Add Student</button>
+        </div>
+    </form>
+
+    <!-- Existing Students Table -->
+    <h2>Existing Student Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>University Roll No.</th>
+                <th>Name</th>
+                <th>Semester</th>
+                <th>Sub 1</th>
+                <th>Sub 2</th>
+                <th>Sub 3</th>
+                <th>Sub 4</th>
+                <th>Sub 5</th>
+                <th>Total</th>
+                <th>CGPA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}">
+                <td data-label="ID" th:text="${student.id}"></td>
+                <td data-label="Roll No." th:text="${student.universityRollNumber}"></td>
+                <td data-label="Name" th:text="${student.name}"></td>
+                <td data-label="Semester" th:text="${student.semester}"></td>
+                <td data-label="Sub 1" th:text="${student.subject1Marks}"></td>
+                <td data-label="Sub 2" th:text="${student.subject2Marks}"></td>
+                <td data-label="Sub 3" th:text="${student.subject3Marks}"></td>
+                <td data-label="Sub 4" th:text="${student.subject4Marks}"></td>
+                <td data-label="Sub 5" th:text="${student.subject5Marks}"></td>
+                <td data-label="Total" th:text="${student.totalMarks}"></td>
+                <td data-label="CGPA" th:text="${student.cgpa}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

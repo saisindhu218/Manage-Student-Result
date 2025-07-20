@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Results Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* General container styling */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Back button styling */
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9e9e9;
+        }
+
+        /* Responsive table styles - ONLY apply on very small screens */
+        @media screen and (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                overflow: hidden;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+                white-space: normal;
+            }
+            td:last-child {
+                border-bottom: 0;
+            }
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                content: attr(data-label);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Student Results Dashboard</h1>
+    <a th:href="@{/landing-page}" class="back-button">Back to Options</a>
+
+    <h2>All Student Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>University Roll No.</th>
+                <th>Name</th>
+                <th>Semester</th>
+                <th>Subject 1 Marks</th>
+                <th>Subject 2 Marks</th>
+                <th>Subject 3 Marks</th>
+                <th>Subject 4 Marks</th>
+                <th>Subject 5 Marks</th>
+                <th>Total Marks</th>
+                <th>CGPA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}">
+                <td data-label="ID" th:text="${student.id}"></td>
+                <td data-label="Roll No." th:text="${student.universityRollNumber}"></td>
+                <td data-label="Name" th:text="${student.name}"></td>
+                <td data-label="Semester" th:text="${student.semester}"></td>
+                <td data-label="Sub 1" th:text="${student.subject1Marks}"></td>
+                <td data-label="Sub 2" th:text="${student.subject2Marks}"></td>
+                <td data-label="Sub 3" th:text="${student.subject3Marks}"></td>
+                <td data-label="Sub 4" th:text="${student.subject4Marks}"></td>
+                <td data-label="Sub 5" th:text="${student.subject5Marks}"></td>
+                <td data-label="Total" th:text="${student.totalMarks}"></td>
+                <td data-label="CGPA" th:text="${student.cgpa}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
