@@ -1,7 +1,7 @@
 
 # Student Result Management System
 
----
+
 
 A web-based Spring Boot application for managing student academic results. It allows secure user login, dashboard views of student records, and adding new student results through an intuitive form interface. The system uses a MySQL database for persistent data storage.
 
