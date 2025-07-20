@@ -1,9 +1,11 @@
 
 # Student Result Management System
 
+---
+
 A web-based Spring Boot application for managing student academic results. It allows secure user login, dashboard views of student records, and adding new student results through an intuitive form interface. The system uses a MySQL database for persistent data storage.
 
----
+
 
 ## Features
 
@@ -13,7 +15,7 @@ A web-based Spring Boot application for managing student academic results. It al
 * **Automated Calculations** – Calculates total marks and CGPA automatically
 * **Database Persistence** – Uses MySQL to store all student data
 
----
+
 
 ##  Tech Stack
 
@@ -23,7 +25,7 @@ A web-based Spring Boot application for managing student academic results. It al
 * **Build Tool:** Maven
 * **Extras:** Lombok (for cleaner code)
 
----
+
 
 ## How to Run
 
@@ -65,7 +67,7 @@ A web-based Spring Boot application for managing student academic results. It al
      * Username: `admin`
      * Password: `admin123`
 
----
+
 
 ## License
 
